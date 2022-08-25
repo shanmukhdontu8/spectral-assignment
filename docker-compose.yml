@@ -1,0 +1,9 @@
+services:
+  grpc_backend:
+    build:
+      context: grpc_backend
+    ports:
+      - "9090:9090"
+    volumes:
+      - "./grpc_backend/protos:/protos"
+      - "./grpc_backend:/grpc_backend"

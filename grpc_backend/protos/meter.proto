@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package meter;
+
+service Meter {
+    // return RPC streaming meter data
+    rpc ReadMeter(MeterRequest) returns (stream MeterReading) {}
+}
+
+message MeterRequest {
+    // filter streaming data based on `start_time` and `end_time` (optional)
+    optional int64 start_time = 1;
+    optional int64 end_time = 2;
+}
+
+message MeterReading {
+    // `meter_reading` starting from `time` to `time + 15 minutes`
+    int64 time = 1;
+    float meter_reading = 2;
+}
