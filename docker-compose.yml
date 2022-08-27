@@ -2,8 +2,16 @@ services:
   grpc_backend:
     build:
       context: grpc_backend
-    ports:
-      - "9090:9090"
     volumes:
       - "./grpc_backend/protos:/protos"
       - "./grpc_backend:/grpc_backend"
+    ports:
+      - "9090:9090"
+  flask_middleware:
+    build:
+      context: flask_middleware
+    volumes:
+      - "./flask_middleware:/flask_middleware"
+      - "./grpc_backend/protos:/flask_middleware/protos"
+    ports:
+      - "5000:5000"
