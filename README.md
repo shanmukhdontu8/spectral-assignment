@@ -63,6 +63,8 @@ gRPC [https://grpc.io/](https://grpc.io/) (Google Remote Procedure Call Framewor
 
 Inside the root directory (`spectral-assignment`) of the project.
 
+- Pre-requisite install `docker`
+
 ```bash
 docker compose up
 ```
