@@ -1,6 +1,6 @@
 import "./App.css";
 import MeterDataPlot from "./components/MeterDataPlot";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient();
 
