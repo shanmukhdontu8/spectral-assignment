@@ -59,6 +59,12 @@ gRPC [https://grpc.io/](https://grpc.io/) (Google Remote Procedure Call Framewor
 
 ## Execution
 
+## Pre-requisites
+
+- `virtualenv`
+
+- `Python 3.9.1`
+
 ## Option 1: Start all servers using a bash script
 
 Inside the root directory (`spectral-assignment`) of the project.
