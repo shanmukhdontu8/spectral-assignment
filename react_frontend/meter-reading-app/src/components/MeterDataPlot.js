@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 // https://charts.ant.design/en/examples/line/basic#line-slider
-import { Line } from "@ant-design/plots";
+import { Line, Histogram } from "@ant-design/plots";
 // https://react-query-v2.tanstack.com/
 import { useQuery } from "react-query";
 // https://mhnpd.github.io/react-loader-spinner/
 import { Bars } from "react-loader-spinner";
 
 // Flask server URL endpoint
-const METER_URL = "http://127.0.0.1:5000/meter";
-
+const METER_URL = process.env.REACT_APP_MIDDLEWARE_HOST;
 const styles = {
   padding: "80px",
 };
@@ -20,6 +19,13 @@ const loaderStyles = {
 };
 
 function MeterDataPlot() {
+  // const [threshold, setThreshold] = useState(250);
+
+  // const [thresHoldSubmit, setThresHoldSubmit] = useState(250);
+
+  // const onChangeThreshold = (event) => {
+  //   setThreshold(event.target.value);
+  // };
   // `MeterDataPlot` Function makes an API call to populate line slider chart
   const { isLoading, error, data } = useQuery("meterData", () =>
     fetch(METER_URL)
@@ -27,7 +33,7 @@ function MeterDataPlot() {
       .catch((error) => console.log(error))
   );
 
-  const newData = data?.map((data) => {
+  const meterData = data?.map((data) => {
     return {
       time: new Date(data.time * 1000).toLocaleString("en-US", {
         timezone: "UTC",
@@ -36,8 +42,17 @@ function MeterDataPlot() {
     };
   });
 
+  const hourlyFrequency = data
+    ?.filter((m) => m.meter_reading > 250)
+    ?.map((data) => {
+      return {
+        time: new Date(data.time * 1000).getHours(),
+      };
+    });
+  // console.log("hourlyFrequency", hourlyFrequency);
+
   const config = {
-    data: newData,
+    data: meterData,
     padding: "auto",
     xField: "time",
     yField: "units",
@@ -54,6 +69,15 @@ function MeterDataPlot() {
       position: "right",
     },
   };
+  const configHistogram = {
+    data: hourlyFrequency,
+    binField: "time",
+    binWidth: 1,
+    tooltip: {
+      showMarkers: false,
+      position: "top",
+    },
+  };
   if (isLoading)
     return (
       <div style={loaderStyles}>
@@ -67,6 +91,10 @@ function MeterDataPlot() {
     <div style={styles}>
       <h2>gRPC meter reading</h2>
       <Line {...config} />
+      {/* <input onChange={(event) => onChangeThreshold(event)}></input> */}
+      {/* <button onClick={() => setThresHoldSubmit(threshold)}>Click me</button> */}
+      <h2>Hourly meter reading frequency</h2>
+      <Histogram {...configHistogram} />
     </div>
   );
 }

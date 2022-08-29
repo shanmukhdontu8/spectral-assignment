@@ -1,0 +1,27 @@
+services:
+  grpc_backend:
+    build:
+      context: grpc_backend
+    volumes:
+      - "./grpc_backend:/grpc_backend"
+    ports:
+      - "9090:9090"
+    command: python grpc_backend_server.py
+
+  flask_middleware:
+    environment:
+      - GRPC_BACKEND_HOST=grpc_backend:9090
+    build:
+      context: flask_middleware
+    volumes:
+      - "./flask_middleware:/flask_middleware"
+      - "./grpc_backend/protos:/flask_middleware/protos"
+    ports:
+      - "5000:5000"
+  meter_reading_app:
+    build:
+      context: react_frontend/meter-reading-app
+    volumes:
+      - "./react_frontend/meter-reading-app:/react_frontend/meter-reading-app"
+    ports:
+      - "3000:3000"

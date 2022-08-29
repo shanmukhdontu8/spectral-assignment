@@ -59,13 +59,21 @@ gRPC [https://grpc.io/](https://grpc.io/) (Google Remote Procedure Call Framewor
 
 ## Execution
 
-## Pre-requisites
+## Option 1: Start all servers using docker (Recommended!)
+
+Inside the root directory (`spectral-assignment`) of the project.
+
+```bash
+docker compose up
+```
+
+## Pre-requisites for running bash scripts
 
 - `virtualenv`
 
 - `Python 3.9.1`
 
-## Option 1: Start all servers using a bash script
+## Option 2: Start all servers using a bash script
 
 Inside the root directory (`spectral-assignment`) of the project.
 
@@ -73,7 +81,7 @@ Inside the root directory (`spectral-assignment`) of the project.
 bash run_app.sh
 ```
 
-## Option 2: Start each server independently using a bash script
+## Option 3: Start each server independently using a bash script
 
 Inside the `grpc_backend` directory of the project.
 
@@ -93,7 +101,7 @@ Inside the `react_frontend/meter-reading-app` directory of the project.
 bash run_react.sh
 ```
 
-## Option 3: Start servers independently
+## Option 4: Start servers independently
 
 Inside the root directory (`spectral-assignment`) of the project.
 
