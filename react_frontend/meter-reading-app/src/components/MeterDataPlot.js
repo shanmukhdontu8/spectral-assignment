@@ -4,11 +4,20 @@ import { Line } from "@ant-design/plots";
 // https://react-query-v2.tanstack.com/
 import { useQuery } from "react-query";
 
+// https://mhnpd.github.io/react-loader-spinner/
+import { Bars } from "react-loader-spinner";
+
 // Flask server URL endpoint
 const METER_URL = "http://127.0.0.1:5000/meter";
 
 const styles = {
   padding: "80px",
+};
+
+const loaderStyles = {
+  left: "45%",
+  position: "absolute",
+  top: "40%",
 };
 
 function MeterDataPlot() {
@@ -46,7 +55,12 @@ function MeterDataPlot() {
       position: "right",
     },
   };
-  if (isLoading) return <div style={styles}>Please wait...</div>;
+  if (isLoading)
+    return (
+      <div style={loaderStyles}>
+        <Bars color="#00BFFF" height={100} width={100} />
+      </div>
+    );
 
   if (error) return "An error has occurred: ";
 
