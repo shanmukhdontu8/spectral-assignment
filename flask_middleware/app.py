@@ -9,8 +9,8 @@ app = Flask(__name__)
 CORS(app)
 
 _ip = 'localhost:9090'
-@app.route('/meter')
-async def server():
+@app.route('/meter', methods=['GET'])
+async def server() -> list:
     """read Meter data from gRPC server
     """
     async with aio.insecure_channel(_ip) as channel:
@@ -20,7 +20,7 @@ async def server():
             meter_readings.append(meter_readings_to_dict(resp))
         return meter_readings   
 
-def meter_readings_to_dict(meter_readings):
+def meter_readings_to_dict(meter_readings) -> dict:
     """converting gRPC response to dictionary
     """
     return { "time": meter_readings.time, \

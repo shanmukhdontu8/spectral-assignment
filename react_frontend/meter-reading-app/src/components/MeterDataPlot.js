@@ -1,7 +1,10 @@
 import React from "react";
+// https://charts.ant.design/en/examples/line/basic#line-slider
 import { Line } from "@ant-design/plots";
+// https://react-query-v2.tanstack.com/
 import { useQuery } from "react-query";
 
+// Flask server URL endpoint
 const METER_URL = "http://127.0.0.1:5000/meter";
 
 const styles = {
@@ -9,6 +12,7 @@ const styles = {
 };
 
 function MeterDataPlot() {
+  // `MeterDataPlot` Function makes an API call to populate line slider chart
   const { isLoading, error, data } = useQuery("meterData", () =>
     fetch(METER_URL)
       .then((res) => res.json())
@@ -17,8 +21,10 @@ function MeterDataPlot() {
 
   const newData = data?.map((data) => {
     return {
-      time: new Date(data.time * 1000).toLocaleString(),
-      reading: data.meter_reading,
+      time: new Date(data.time * 1000).toLocaleString("en-US", {
+        timezone: "UTC",
+      }),
+      units: data.meter_reading,
     };
   });
 
@@ -26,15 +32,19 @@ function MeterDataPlot() {
     data: newData,
     padding: "auto",
     xField: "time",
-    yField: "reading",
+    yField: "units",
     xAxis: {
       tickCount: 5,
     },
     slider: {
-      start: 0.1,
-      end: 0.5,
+      start: 0,
+      end: 1,
     },
     smooth: true,
+    legend: {
+      layout: "horizontal",
+      position: "right",
+    },
   };
   if (isLoading) return "Loading...";
 
