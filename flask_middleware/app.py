@@ -20,7 +20,7 @@ async def server() -> list:
             meter_readings.append(meter_readings_to_dict(resp))
         return meter_readings   
 
-def meter_readings_to_dict(meter_readings) -> dict:
+def meter_readings_to_dict(meter_readings):
     """converting gRPC response to dictionary
     """
     return { "time": meter_readings.time, \

@@ -15,11 +15,12 @@ class Meter(MeterServicer):
             yield MeterReading(time=row_timestamp, meter_reading=row_value)
        
 
-def read_csv_file(csv) -> list:
+def read_csv_file(csv):
     """read CSV file
     """
     with open(csv, 'r') as read_obj:
         meter_usage_csv = reader(read_obj)
+        # Skipping headers
         next(meter_usage_csv)
         for data in meter_usage_csv:
             yield data

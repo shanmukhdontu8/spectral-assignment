@@ -46,7 +46,7 @@ function MeterDataPlot() {
       position: "right",
     },
   };
-  if (isLoading) return "Loading...";
+  if (isLoading) return <div style={styles}>Please wait...</div>;
 
   if (error) return "An error has occurred: ";
 
