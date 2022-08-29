@@ -41,9 +41,9 @@ bash run_grpc.sh
 ### Guide
 
 This is the gRPC backend server folder \
-The grpc server listens on port `9090` and responds to flask middleware using protocol buffers created using meter.proto.
+The grpc server listens on port `9090` and responds to flask middleware using protocol buffers created by meter.proto.
 
-To compile the `meter.proto` file definition we need to run:
+To compile the `meter.proto` file definition we need to run (virtualenv):
 
 ```bash
  python -m grpc_tools.protoc --proto_path=./ --python_out=./ --grpc_python_out=./ ./protos/meter.proto
