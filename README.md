@@ -163,6 +163,11 @@ npm install
 npm start
 ```
 
-#
+## Charts
+
+There are two visual representation of data in the UI
+
+- gRPC meter reading: Get meter reading data of all data point in the CSV from the middleware server which can be zoomed and paned.
+- Hourly meter reading frequency: Get meter reading frequency of the hours (00:00 - 24:00). Helps in knowing peak hours.
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
