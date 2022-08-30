@@ -45,11 +45,9 @@ gRPC [https://grpc.io/](https://grpc.io/) (Google Remote Procedure Call Framewor
 
 - `MeterRequest` class exposed by protoc is used to request the gRPC server for streaming `(flask_middleware/app.py)`
 
-- `MeterStub` class exposed by protoc is used to call the service `ReadMeter` with a request `MeterRequest`(:9090)`(flask_middleware/app.py)`
+- `MeterStub` class exposed by protoc is used to call the method `ReadMeter` which serializes the request and de-serializes the response to the middleware (grpc client) `(flask_middleware/app.py)`
 
-- `Readmeter` method exposed by protoc is used to make request to the gRPC server which responds back with `MeterReading` `(flask_middleware/app.py)`
-
-- `MeterReading` class exposed by protoc is used to serve response from RPC streaming. (flask_middleware/read_csv.py)
+- `MeterReading` class exposed by protoc is used to serve response from gRPC streaming. (flask_middleware/read_csv.py)
 
 ### React Frontend
 
@@ -62,6 +60,8 @@ gRPC [https://grpc.io/](https://grpc.io/) (Google Remote Procedure Call Framewor
 ## Option 1: Start all servers using docker (Recommended!)
 
 Inside the root directory (`spectral-assignment`) of the project.
+
+- Pre-requisite install `docker`
 
 ```bash
 docker compose up
